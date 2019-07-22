@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>hbs-spring3</groupId>
+		<artifactId>hbs-main</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>hbs-client</artifactId>
+	<name>hbs-client</name>
+
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-remoting -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-remoting</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>hbs-spring3</groupId>
+			<artifactId>hbs-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
+		<!-- Below CGILIB is required to resolve this exception -->
+		<!-- https://stackoverflow.com/questions/19652166/java-lang-nosuchmethodexception-com-sun-proxy-on-struts2-actions/19665141#19665141 -->
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.2.12</version>
+		</dependency>
+
+
+	</dependencies>
+</project>

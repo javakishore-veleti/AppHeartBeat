@@ -1,0 +1,52 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+     http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+
+	<util:properties id="applicationProps"
+		location="application.properties"></util:properties>
+
+	<!-- <bean id="restTemplate" -->
+	<!-- class="org.springframework.web.client.RestTemplate"> -->
+	<!-- <property name="messageConverters"> -->
+	<!-- <list> -->
+	<!-- <bean -->
+	<!-- class="org.springframework.http.converter.xml.SourceHttpMessageConverter" 
+		/> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="getServerHeartBeatScheduler" -->
+	<!-- class="hbs.client.GetServerHeartBeatScheduler"> -->
+	<!-- <constructor-arg ref="restTemplate"></constructor-arg> -->
+	<!-- <constructor-arg -->
+	<!-- value="#{applicationProps['heartbeat.to.be.observed.server.url']}"></constructor-arg> -->
+	<!-- </bean> -->
+
+	<bean id="getServerHeartBeatScheduler"
+		class="hbs.client.GetServerHeartBeatScheduler">
+		<constructor-arg
+			value="#{applicationProps['heartbeat.to.be.observed.server.url']}"></constructor-arg>
+	</bean>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="getServerHeartBeatScheduler"
+			method="executeRestfulCallToServer"
+			cron="#{applicationProps['cron.expression']}"></task:scheduled>
+	</task:scheduled-tasks>
+
+	<bean id="httpInvokerProxy"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl"
+			value="http://localhost:8080/api/heart-beat-info" />
+		<property name="serviceInterface"
+			value="hbs.common.api.HeartBeatInfoService" />
+	</bean>
+
+
+</beans>

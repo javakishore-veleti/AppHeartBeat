@@ -1,0 +1,38 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+     http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+
+	<util:properties id="applicationProps"
+		location="application.properties"></util:properties>
+
+
+	<bean id="heartBeatInfoServiceImpl"
+		class="hbs.server.HeartBeatInfoServiceImpl"></bean>
+
+
+	<!-- https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/remoting.html -->
+
+	<bean name="heartBeatInfoServiceExporter"
+		class="org.springframework.remoting.httpinvoker.SimpleHttpInvokerServiceExporter">
+		<property name="service" ref="heartBeatInfoServiceImpl" />
+		<property name="serviceInterface"
+			value="hbs.common.api.HeartBeatInfoService" />
+	</bean>
+
+	<bean id="httpServer"
+		class="org.springframework.remoting.support.SimpleHttpServerFactoryBean">
+		<property name="contexts">
+			<util:map>
+				<entry key="/api/heart-beat-info"
+					value-ref="heartBeatInfoServiceExporter" />
+			</util:map>
+		</property>
+		<property name="port" value="8080" />
+	</bean>
+
+</beans>
