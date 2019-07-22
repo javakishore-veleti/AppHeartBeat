@@ -30,7 +30,7 @@
 			</util:map>
 		</property>
 		<property name="port"
-			value="#{applicationProps['heartbeat.server.http.portl']}" />
+			value="#{applicationProps['heartbeat.server.http.port']}" />
 	</bean>
 
 </beans>
