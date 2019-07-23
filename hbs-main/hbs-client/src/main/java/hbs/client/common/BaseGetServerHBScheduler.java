@@ -20,6 +20,11 @@ public abstract class BaseGetServerHBScheduler {
 	protected String emailSubject;
 	protected String emailMessage;
 
+	/*
+	 * This is Spring bean proxy because of HttpInvokerProxyFactoryBean
+	 * This is interface which Spring proxying it at the client side
+	 */
+	
 	protected HeartBeatInfoService heartBeatInfoService;
 
 	public BaseGetServerHBScheduler() {

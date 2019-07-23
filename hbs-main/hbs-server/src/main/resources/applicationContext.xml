@@ -21,6 +21,7 @@
 			value="hbs.common.api.HeartBeatInfoService" />
 	</bean>
 
+<!--  simulation web.xml servlet-mappings example -->
 	<bean id="httpServer"
 		class="org.springframework.remoting.support.SimpleHttpServerFactoryBean">
 		<property name="contexts">

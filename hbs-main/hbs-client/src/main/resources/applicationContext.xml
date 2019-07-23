@@ -7,8 +7,6 @@
      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
      http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
-	<import resource="classpath:applicationContext-common.xml" />
-
 	<bean id="getServerHeartBeatScheduler"
 		class="hbs.client.GetServerHeartBeatScheduler">
 		<constructor-arg
@@ -21,6 +19,37 @@
 			value="#{applicationProps['heartbeat.to.be.observed.server.url']}" />
 		<property name="serviceInterface"
 			value="hbs.common.api.HeartBeatInfoService" />
+	</bean>
+
+	<!-- Any change to this bean id please change the ClientAppMain.java code 
+		changes also -->
+	<util:properties id="applicationProps"
+		location="application.properties"></util:properties>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="getServerHeartBeatScheduler"
+			method="executeRestfulCallToServer"
+			cron="#{applicationProps['cron.expression']}"></task:scheduled>
+	</task:scheduled-tasks>
+
+	<!-- EMAIL CONFIGURATION -->
+	<!-- https://www.javatpoint.com/spring-java-mail-tutorial -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host"
+			value="#{applicationProps['mail.smtp.server']}" />
+		<property name="username"
+			value="#{applicationProps['mail.username']}" />
+		<property name="password"
+			value="#{applicationProps['mail.password']}" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.socketFactory.port">465</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+				<prop key="mail.smtp.port">465</prop>
+			</props>
+		</property>
 	</bean>
 
 
