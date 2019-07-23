@@ -13,6 +13,9 @@ To achieve scenario 1, i.e. Spring Bean acting as a web service, Spring document
 To achieve scenario 2, i.e. Spring Bean acting as a web service, Spring documentation mention to use "@Controller" annotation for the Spring Bean class 
 
 
+![Here is the overall design](Design.jpg)
+
+
 ** Note: Below steps assume you are invoking below commands from "hbs-main" folder ** 
 
 # Running Heart Beat Server:
