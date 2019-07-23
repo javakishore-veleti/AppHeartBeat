@@ -31,14 +31,14 @@ public class ServerAppMain_NotInWebServer {
 		String thisServerPortNo = props.getProperty("heartbeat.server.http.port");
 		String heartBeatServerAPIURL = props.getProperty("heartbeat.server.api.url");
 
-		LOGGER.debug("");
-		LOGGER.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		LOGGER.debug("");
-		LOGGER.debug("	(Not deployed in a webserver)");
-		LOGGER.debug("	Heart Beat server URL is http://<SERVER-IP>:" + thisServerPortNo + "/" + heartBeatServerAPIURL);
-		LOGGER.debug("");
-		LOGGER.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		LOGGER.debug("");
+		LOGGER.info("");
+		LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		LOGGER.info("");
+		LOGGER.info("	(Not deployed in a webserver)");
+		LOGGER.info("	Heart Beat server URL is http://<SERVER-IP>:" + thisServerPortNo + "/" + heartBeatServerAPIURL);
+		LOGGER.info("");
+		LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		LOGGER.info("");
 
 		/*
 		 * Check out applicationContext.xml and application.properties files for
