@@ -1,5 +1,7 @@
 
 
+Note: Below steps assume you are invoking below commands from "hbs-main" folder 
+
 # Running Heart Beat Server:
 
 ### 1. Not deployed in any webserver 		- as stand alone Spring / Java application
@@ -8,7 +10,7 @@
 
 ### 2. Deployed in web container				- as Spring / Java in WebServer (Tomcat)
 
-run_server_in_web.sh
+./bin/run_server_in_web.sh
 
 
 # Running Heart Beat Client:
