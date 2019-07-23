@@ -3,11 +3,9 @@
  */
 package hbs.client.v2;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestOperations;
 
 import hbs.client.common.BaseGetServerHBScheduler;
@@ -23,7 +21,6 @@ public class V2GetServerHeartBeatScheduler extends BaseGetServerHBScheduler {
 	public static final String BEAN_ID = "getServerHeartBeatScheduler";
 
 	private RestOperations restTemplate;
-	private Map<String, String> variables = new HashMap<String, String>(3);
 
 	public V2GetServerHeartBeatScheduler(String v2ServerURL, RestOperations restTemplate) {
 		super();
@@ -37,7 +34,11 @@ public class V2GetServerHeartBeatScheduler extends BaseGetServerHBScheduler {
 
 			LOGGER.debug("Fetching the HeartBeat info for the server " + serverURL);
 
-			String receivedMessage = restTemplate.getForObject(serverURL, String.class, variables);
+			ResponseEntity<String> response = restTemplate.getForEntity(serverURL, String.class);
+			String receivedMessage = response.getBody();
+
+			// String receivedMessage = restTemplate.getForObject(serverURL, String.class,
+			// variables);
 
 			LOGGER.debug("Received message from the heartbeat info server as " + receivedMessage);
 
