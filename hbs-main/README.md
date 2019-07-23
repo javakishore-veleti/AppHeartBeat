@@ -14,11 +14,11 @@ To achieve scenario 2, i.e. Spring Bean acting as a web service, Spring document
 
 
 ![Here is the overall design](Design.jpg)
-
-
-** Note: Below steps assume you are invoking below commands from "hbs-main" folder ** 
+ 
 
 # Running Heart Beat Server:
+
+** Note: Below steps assume you are invoking below commands from "hbs-main" folder **
 
 ##### 1. Not deployed in any webserver 		- as stand alone Spring / Java application
 
