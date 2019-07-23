@@ -25,7 +25,7 @@
 		class="org.springframework.remoting.support.SimpleHttpServerFactoryBean">
 		<property name="contexts">
 			<util:map>
-				<entry key="/api/heart-beat-info"
+				<entry key="#{applicationProps['heartbeat.server.api.url']}"
 					value-ref="heartBeatInfoServiceExporter" />
 			</util:map>
 		</property>

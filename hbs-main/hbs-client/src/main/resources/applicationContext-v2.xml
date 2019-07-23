@@ -9,19 +9,24 @@
 
 	<import resource="classpath:applicationContext-common.xml" />
 
-	<bean id="getServerHeartBeatScheduler"
-		class="hbs.client.GetServerHeartBeatScheduler">
-		<constructor-arg
-			value="#{applicationProps['heartbeat.to.be.observed.server.url']}"></constructor-arg>
+	<bean id="restTemplate"
+		class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+			</list>
+		</property>
 	</bean>
 
-	<bean id="httpInvokerProxy"
-		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl"
-			value="#{applicationProps['heartbeat.to.be.observed.server.url']}" />
-		<property name="serviceInterface"
-			value="hbs.common.api.HeartBeatInfoService" />
+	<bean id="getServerHeartBeatScheduler"
+		class="hbs.client.v2.V2GetServerHeartBeatScheduler">
+		<constructor-arg
+			value="#{applicationProps['heartbeat.to.be.observed.server.url.v2']}"></constructor-arg>
+		<constructor-arg ref="restTemplate"></constructor-arg>
 	</bean>
+
+
 
 
 </beans>
