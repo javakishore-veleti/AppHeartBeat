@@ -29,12 +29,12 @@ public class ClientApp_For_Multi_Servers {
 	public static void main(String[] args) throws Exception {
 		LOGGER.debug("Enter");
 
-		ApplicationContext applicationCtx = new ClassPathXmlApplicationContext("appCtx-autosys-multi-app-servers.xml");
+		new ClassPathXmlApplicationContext("appCtx-autosys-multi-app-servers.xml");
 
 		printInformationAboutThisClient();
 
 		List<AppServerHBeatURLInfo> appServerHBUrlsList = parseServersURLInfoJSON("All-App-Servers-HB-URL-Info.json");
-		invokeAllAppServersForHeartBeatInfo(appServerHBUrlsList, applicationCtx);
+		invokeAllAppServersForHeartBeatInfo(appServerHBUrlsList);
 
 		LOGGER.debug("Shutting down the client program i.e. this client program JVM is getting killed");
 		LOGGER.debug("Exit");
@@ -46,20 +46,18 @@ public class ClientApp_For_Multi_Servers {
 	 * HAVE ANY SCHEDULER RUNNING IN THIS JVM RUNTIME
 	 * 
 	 */
-	private static void invokeAllAppServersForHeartBeatInfo(List<AppServerHBeatURLInfo> appServerHBUrlsList,
-			ApplicationContext applicationCtx) {
+	private static void invokeAllAppServersForHeartBeatInfo(List<AppServerHBeatURLInfo> appServerHBUrlsList) {
 
 		for (AppServerHBeatURLInfo appServerHBeatURLInfo : appServerHBUrlsList) {
 
-			invokeAnAppServerForItsHeartBeatInfo(appServerHBeatURLInfo, applicationCtx);
+			invokeAnAppServerForItsHeartBeatInfo(appServerHBeatURLInfo);
 		}
 	}
 
 	/*
 	 * http://www.pgt.de/2009/02/26/how-to-use-the-simplehttpinvokerserviceexporter/
 	 */
-	private static void invokeAnAppServerForItsHeartBeatInfo(AppServerHBeatURLInfo serverHBeatURLInfo,
-			ApplicationContext applicationCtx) {
+	private static void invokeAnAppServerForItsHeartBeatInfo(AppServerHBeatURLInfo serverHBeatURLInfo) {
 
 		printStartLogMessage(serverHBeatURLInfo.getAppName());
 
