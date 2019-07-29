@@ -1,22 +1,22 @@
-package hbs.client.v2;
+package hbs.client.server.inwar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import hbs.client.common.BaseClientAppMain;
 
-public class ClientAppMain_ServerInWebServer extends BaseClientAppMain {
+public class ClientApp_ForInWar extends BaseClientAppMain {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClientAppMain_ServerInWebServer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClientApp_ForInWar.class);
 
-	public ClientAppMain_ServerInWebServer() {
+	public ClientApp_ForInWar() {
 		super("applicationContext-v2.xml");
 	}
 
 	public static void main(String[] args) {
 		LOGGER.debug("Enter");
 
-		ClientAppMain_ServerInWebServer client = new ClientAppMain_ServerInWebServer();
+		ClientApp_ForInWar client = new ClientApp_ForInWar();
 
 		client.execute(args);
 

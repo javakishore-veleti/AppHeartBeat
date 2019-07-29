@@ -20,7 +20,7 @@ public class BaseClientAppMain {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BaseClientAppMain.class);
 
-	public static final String SERVER_HEART_BEAT_SCHEDULER_BEAN_ID = "getServerHeartBeatScheduler";
+	public static final String SERVER_HEART_BEAT_CLIENT_SERVICE_BEAN_ID = "getServerHeartBeatService";
 
 	protected String appCtxXMLFileName;
 	protected Properties props = null;
@@ -32,22 +32,13 @@ public class BaseClientAppMain {
 	/**
 	 * @param args
 	 */
-	public void execute(String[] args) {
+	public BaseGetServerHBService execute(String[] args) {
 		LOGGER.debug("Enter appCtxXMLFileName " + appCtxXMLFileName);
 
 		// open/read the application context file
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(appCtxXMLFileName);
 
-		BaseGetServerHBScheduler heartBeatScheduler = ctx.getBean(SERVER_HEART_BEAT_SCHEDULER_BEAN_ID,
-				BaseGetServerHBScheduler.class);
-
-		loadOptionalHeartBeatInfoService(ctx, heartBeatScheduler);
-
-		MailSender mailSender = ctx.getBean(MailSender.class);
-		heartBeatScheduler.setMailSender(mailSender);
-
-		props = ctx.getBean("applicationProps", Properties.class);
-		populateEmailConfigFromProperties(heartBeatScheduler, props);
+		BaseGetServerHBService serverInvokerClientService = checkHeartBeatClientServiceBeanAndSetDependencies(ctx);
 
 		/*
 		 * Check out applicationContext.xml and application.properties files for
@@ -55,22 +46,38 @@ public class BaseClientAppMain {
 		 */
 
 		LOGGER.debug("Exit");
+		return serverInvokerClientService;
+	}
+
+	private BaseGetServerHBService checkHeartBeatClientServiceBeanAndSetDependencies(ClassPathXmlApplicationContext ctx) {
+
+		BaseGetServerHBService serverInvokerClientService = ctx.getBean(SERVER_HEART_BEAT_CLIENT_SERVICE_BEAN_ID,
+				BaseGetServerHBService.class);
+
+		MailSender mailSender = ctx.getBean(MailSender.class);
+		serverInvokerClientService.setMailSender(mailSender);
+
+		props = ctx.getBean("applicationProps", Properties.class);
+		populateEmailConfigFromProperties(serverInvokerClientService, props);
+
+		loadOptionalHeartBeatInfoService(ctx, serverInvokerClientService);
+
+		return serverInvokerClientService;
 	}
 
 	private void loadOptionalHeartBeatInfoService(ClassPathXmlApplicationContext ctx,
-			BaseGetServerHBScheduler heartBeatScheduler) {
+			BaseGetServerHBService serverInvokerClientService) {
 
 		try {
 			HeartBeatInfoService hbInfoServiceProxy = ctx.getBean(HeartBeatInfoService.class);
-			heartBeatScheduler.setHeartBeatInfoService(hbInfoServiceProxy);
+			serverInvokerClientService.setHeartBeatInfoService(hbInfoServiceProxy);
 
 		} catch (Throwable throwable) {
 			LOGGER.warn("Optional HeartBeatInfoService bean does not exists");
 		}
 	}
 
-	private static void populateEmailConfigFromProperties(BaseGetServerHBScheduler heartBeatScheduler,
-			Properties props) {
+	private static void populateEmailConfigFromProperties(BaseGetServerHBService heartBeatScheduler, Properties props) {
 		LOGGER.debug("Enter");
 
 		heartBeatScheduler.setSendEmailWhenServerRespondFailed(

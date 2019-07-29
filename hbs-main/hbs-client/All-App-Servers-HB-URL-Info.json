@@ -1,0 +1,14 @@
+[
+	{
+		"appName": "App Server 1",
+		"appHeartBeatUrl": "http://localhost:8080/api/heart-beat-info"
+	},
+	{
+		"appName": "App Server 2",
+		"appHeartBeatUrl": "http://localhost:8080/api/heart-beat-info"
+	},
+	{
+		"appName": "App Server 3",
+		"appHeartBeatUrl": "http://localhost:8080/api/heart-beat-info"
+	}
+]

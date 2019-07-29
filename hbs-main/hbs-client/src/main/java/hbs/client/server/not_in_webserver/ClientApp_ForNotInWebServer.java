@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hbs.client;
+package hbs.client.server.not_in_webserver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,18 +12,18 @@ import hbs.client.common.BaseClientAppMain;
  * @author kishore.veleti
  *
  */
-public class ClientAppMain_ServerNotInWebServer extends BaseClientAppMain {
+public class ClientApp_ForNotInWebServer extends BaseClientAppMain {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClientAppMain_ServerNotInWebServer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClientApp_ForNotInWebServer.class);
 
-	public ClientAppMain_ServerNotInWebServer() {
+	public ClientApp_ForNotInWebServer() {
 		super("applicationContext.xml");
 	}
 
 	public static void main(String[] args) {
 		LOGGER.debug("Enter");
 
-		ClientAppMain_ServerNotInWebServer client = new ClientAppMain_ServerNotInWebServer();
+		ClientApp_ForNotInWebServer client = new ClientApp_ForNotInWebServer();
 
 		client.execute(args);
 

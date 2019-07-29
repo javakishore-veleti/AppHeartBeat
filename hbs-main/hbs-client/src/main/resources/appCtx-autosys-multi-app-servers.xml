@@ -15,10 +15,4 @@
 			value="#{applicationProps['heartbeat.to.be.observed.server.url']}"></constructor-arg>
 	</bean>
 
-	<task:scheduled-tasks>
-		<task:scheduled ref="getServerHeartBeatService"
-			method="executeRestfulCallToServer"
-			cron="#{applicationProps['cron.expression']}"></task:scheduled>
-	</task:scheduled-tasks>
-
 </beans>

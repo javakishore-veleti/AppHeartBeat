@@ -1,24 +1,24 @@
 /**
  * 
  */
-package hbs.client;
+package hbs.client.server.not_in_webserver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import hbs.client.common.BaseGetServerHBScheduler;
+import hbs.client.common.BaseGetServerHBService;
 
 /**
  * @author kishore.veleti
  *
  */
-public class GetServerHeartBeatScheduler extends BaseGetServerHBScheduler {
+public class GetServerHeartBeatService extends BaseGetServerHBService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GetServerHeartBeatScheduler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(GetServerHeartBeatService.class);
 
-	public static final String BEAN_ID = "getServerHeartBeatScheduler";
+	public static final String BEAN_ID = "getServerHeartBeatService";
 
-	public GetServerHeartBeatScheduler(String serverURL) {
+	public GetServerHeartBeatService(String serverURL) {
 		this.serverURL = serverURL;
 	}
 
@@ -29,6 +29,7 @@ public class GetServerHeartBeatScheduler extends BaseGetServerHBScheduler {
 	 * applicationContext.xml This method is invoked because of configuration in
 	 * applicationContext.xml
 	 */
+	@Override
 	public void executeRestfulCallToServer() {
 		LOGGER.debug("Enter");
 

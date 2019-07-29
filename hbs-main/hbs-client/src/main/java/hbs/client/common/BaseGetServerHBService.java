@@ -7,9 +7,9 @@ import org.springframework.mail.SimpleMailMessage;
 
 import hbs.common.api.HeartBeatInfoService;
 
-public abstract class BaseGetServerHBScheduler {
+public abstract class BaseGetServerHBService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BaseGetServerHBScheduler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BaseGetServerHBService.class);
 
 	protected String serverURL;
 	protected MailSender mailSender;
@@ -21,18 +21,20 @@ public abstract class BaseGetServerHBScheduler {
 	protected String emailMessage;
 
 	/*
-	 * This is Spring bean proxy because of HttpInvokerProxyFactoryBean
-	 * This is interface which Spring proxying it at the client side
+	 * This is Spring bean proxy because of HttpInvokerProxyFactoryBean This is
+	 * interface which Spring proxying it at the client side
 	 */
-	
+
 	protected HeartBeatInfoService heartBeatInfoService;
 
-	public BaseGetServerHBScheduler() {
+	public BaseGetServerHBService() {
 	}
 
 	public HeartBeatInfoService getHeartBeatInfoService() {
 		return heartBeatInfoService;
 	}
+
+	public abstract void executeRestfulCallToServer();
 
 	public void setHeartBeatInfoService(HeartBeatInfoService heartBeatInfoService) {
 		this.heartBeatInfoService = heartBeatInfoService;

@@ -1,33 +1,34 @@
 /**
  * 
  */
-package hbs.client.v2;
+package hbs.client.server.inwar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestOperations;
 
-import hbs.client.common.BaseGetServerHBScheduler;
+import hbs.client.common.BaseGetServerHBService;
 
 /**
  * @author kishore.veleti
  *
  */
-public class V2GetServerHeartBeatScheduler extends BaseGetServerHBScheduler {
+public class GetServerHeartBeatService extends BaseGetServerHBService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(V2GetServerHeartBeatScheduler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(GetServerHeartBeatService.class);
 
-	public static final String BEAN_ID = "getServerHeartBeatScheduler";
+	public static final String BEAN_ID = "getServerHeartBeatService";
 
 	private RestOperations restTemplate;
 
-	public V2GetServerHeartBeatScheduler(String v2ServerURL, RestOperations restTemplate) {
+	public GetServerHeartBeatService(String v2ServerURL, RestOperations restTemplate) {
 		super();
 		this.serverURL = v2ServerURL;
 		this.restTemplate = restTemplate;
 	}
 
+	@Override
 	public void executeRestfulCallToServer() {
 
 		try {
