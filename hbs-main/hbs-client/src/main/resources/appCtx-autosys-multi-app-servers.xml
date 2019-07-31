@@ -9,10 +9,5 @@
 
 	<import resource="classpath:applicationContext-common.xml" />
 
-	<bean id="getServerHeartBeatService"
-		class="hbs.client.server.not_in_webserver.GetServerHeartBeatService">
-		<constructor-arg
-			value="#{applicationProps['heartbeat.to.be.observed.server.url']}"></constructor-arg>
-	</bean>
 
 </beans>
